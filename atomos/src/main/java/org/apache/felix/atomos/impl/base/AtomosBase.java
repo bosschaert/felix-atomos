@@ -575,7 +575,7 @@ public abstract class AtomosBase implements Atomos, SynchronousBundleListener, F
                     connectionManaged = managingConnected.get().removeLastOccurrence(
                         content);
                 }
-                else 
+                else
                 {
                     connectionManaged = false;
                 }
@@ -1029,7 +1029,7 @@ public abstract class AtomosBase implements Atomos, SynchronousBundleListener, F
             {
                 // Use a connection to get the JarFile this avoids having to parse the jar: URL
                 // For spring loader they support nested jars with additional !/
-                // For example: 
+                // For example:
                 //   jar:file:/path/to/out.jar!/path/to/inner.jar!/META-INF/MANIFEST.MF
                 // Instead of dealing with that just get the JarFile directly that supports this
                 // embedded jar stuff
@@ -1283,7 +1283,7 @@ public abstract class AtomosBase implements Atomos, SynchronousBundleListener, F
             private final String symbolicName;
 
             /**
-             * Bundle version 
+             * Bundle version
              */
             private final Version version;
 
@@ -1663,9 +1663,8 @@ public abstract class AtomosBase implements Atomos, SynchronousBundleListener, F
                 try
                 {
                     content.getEntries().forEach((s) -> {
-                        if (s.length() > 1 && s.endsWith("/") && s.indexOf('-') < 0)
-                        {
-                            String pkg = s.substring(0, s.length() - 1).replace('/', '.');
+                        if (s.endsWith(".class")) {
+                            String pkg = s.substring(0, s.lastIndexOf('/')).replace('/', '.');
                             packageToAtomosContent.put(pkg,
                                 (AtomosContentIndexed) atomosContent);
                         }
