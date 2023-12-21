@@ -32,7 +32,6 @@ import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -73,8 +72,10 @@ public class LauncherImpl implements Launcher
                 throw new UncheckedIOException(e);
             }
         }).flatMap(j -> j.stream()).filter(e -> !e.isDirectory()).filter(
-            e -> e.getName().endsWith(".class")).filter(
-                e -> !e.getName().endsWith("module-info.class")).map(e -> {
+            e -> e.getName().endsWith(".class"))
+                .filter(e -> !e.getName().startsWith("META-INF/versions/"))
+                .filter(e -> !e.getName().endsWith("module-info.class"))
+                .map(e -> {
                     try
                     {
                         String name = e.getName().replace("/", ".").substring(0,

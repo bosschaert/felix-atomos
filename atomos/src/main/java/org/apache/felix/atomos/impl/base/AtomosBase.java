@@ -950,6 +950,9 @@ public abstract class AtomosBase implements Atomos, SynchronousBundleListener, F
         {
             final String indexRoot = indexPath.substring(0,
                 indexPath.lastIndexOf('/') + 1);
+
+            System.out.println("### indexRoot: " + indexRoot);
+
             try (BufferedReader reader = new BufferedReader(
                 new InputStreamReader(index.openStream())))
             {
